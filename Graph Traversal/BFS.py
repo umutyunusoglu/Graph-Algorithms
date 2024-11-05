@@ -4,12 +4,6 @@ from numpy.typing import ArrayLike
 import dataclasses
 
 
-SAMPLE_GRAPH=[[0, 1, 0, 1],
-              [1, 0, 1, 1],
-              [0, 1, 0, 1],
-              [1, 1, 1, 0]]
-
-
 
 
 def BFS(adj_matrix:ArrayLike,start,end)->ArrayLike:
