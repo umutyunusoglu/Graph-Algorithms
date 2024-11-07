@@ -1,8 +1,8 @@
 import Graph
 import fnmatch
+from xml.dom import minidom
 
-
-def read_graph(file_path: str) -> Graph.Graph():
+def read_graph(file_path: str) -> Graph.Graph:
     """
     A function to read graph from a file and return a graph object.
     Supports GraphML Format
@@ -14,8 +14,8 @@ def read_graph(file_path: str) -> Graph.Graph():
 
     if fnmatch.fnmatch(file_path, "*.graphml"):
 
-        g = Graph.Graph()
-        g.read_graphml(file_path)
+        g = _process_graph_ml(file_path)
+
         return g
 
     else:
@@ -35,3 +35,15 @@ def _process_graph_ml(file_path: str) -> Graph.Graph:
 
 
     return g
+
+
+
+if(__name__=="__main__"):
+
+    dom = minidom.parse("./Sample Data/airlines.graphml")
+    vertices = dom.getElementsByTagName('node')
+    edges=dom.getElementsByTagName('edge')
+    print(f"There are {len(vertices)} items:")
+
+    for element in vertices:
+        print(element.attributes['id'].value)
