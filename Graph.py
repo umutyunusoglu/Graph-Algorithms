@@ -5,8 +5,14 @@ import numpy as np
 
 @dataclasses.dataclass
 class Vertex():
+    
+    v_id:int
     value:Any
     is_visited:bool
+
+    def __hash__(self):
+        
+        return hash(self.v_id)
 
 
 class Graph():
@@ -49,9 +55,10 @@ class Graph():
         self._vertices:List[Vertex] = [vertex for vertex in set(vertices)]
         self._edges:DefaultDict[Vertex,List[Vertex]]=defaultdict(list)
 
+        v_ids=[v.v_id for v in self._vertices]
         for edge in edges:
             
-            if not(edge[0] in self._vertices and edge[1] in self._vertices):
+            if not(edge[0] in v_ids and edge[1] in v_ids):
                 raise Exception("An End Point of Vertex Doesnt Exist in Vertex Set")
             
             self._edges[edge[0]].append(edge[1])
@@ -94,11 +101,14 @@ class Graph():
 if(__name__=="__main__"):
 
     vertices=[1,2,3,4]
+    vertices=[Vertex(i,None,False) for i in vertices]
+
     edges=[(1,2),(1,4),
             (2,1),(2,2),(2,3),(2,4),
             (3,4),
             (4,1),(4,2)]
-
+    
+    
 
     g=Graph(vertices,edges)
 

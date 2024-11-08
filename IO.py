@@ -46,4 +46,22 @@ if(__name__=="__main__"):
     print(f"There are {len(vertices)} items:")
 
     for element in vertices:
-        print(element.attributes['id'].value)
+   
+        data=element.getElementsByTagName("data")
+        print("id:",element.attributes['id'].value)
+        for d in data:
+            
+            match d.getAttribute("key"):
+                
+                case "x":
+                    print("x:",d.firstChild.nodeValue)
+                    
+
+                case "y":
+                    print("y:",d.firstChild.nodeValue)
+
+
+        print("-------------------------")
+
+    for element in edges:
+        print(element.getAttribute("source"),element.getAttribute("target"))
