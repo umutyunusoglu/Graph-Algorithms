@@ -1,8 +1,8 @@
-import Graph
+from Graph import Graph,Vertex,Edge
 import fnmatch
 from xml.dom import minidom
 
-def read_graph(file_path: str) -> Graph.Graph:
+def read_graph(file_path: str,directed=False) ->Graph:
     """
     A function to read graph from a file and return a graph object.
     Supports GraphML Format
@@ -14,7 +14,7 @@ def read_graph(file_path: str) -> Graph.Graph:
 
     if fnmatch.fnmatch(file_path, "*.graphml"):
 
-        g = _process_graph_ml(file_path)
+        g = _process_graph_ml(file_path,directed)
 
         return g
 
@@ -22,7 +22,7 @@ def read_graph(file_path: str) -> Graph.Graph:
         raise Exception("File Format Not Supported")
 
 
-def _process_graph_ml(file_path: str) -> Graph.Graph:
+def _process_graph_ml(file_path: str,directed=False) -> Graph:
     """
     A helper function to read and process graphml file to a graph object.
 
@@ -31,37 +31,38 @@ def _process_graph_ml(file_path: str) -> Graph.Graph:
     Returns:
         g:Graph -> graph object constructed from file data
     """
-    g = Graph.Graph()
+    dom = minidom.parse(file_path)
 
 
-    return g
+    raw_v = dom.getElementsByTagName('node')
+    raw_e=dom.getElementsByTagName('edge')
+
+    vertices=[]
+    edges=[]
+    for v in raw_v:
+
+        v_data={}
+        data=v.getElementsByTagName("data")
+        
+        
+        for d in data:
+            v_data[d.getAttribute("key")]=d.firstChild.nodeValue
+        
+
+        vertices.append(Vertex(v_id=int(v.attributes['id'].value),value=v_data))
+    
+    for e in raw_e:
+
+        source=int(e.getAttribute("source"))
+        target=int(e.getAttribute("target"))
+
+        edges.append(Edge(source,target,directed))
+    
+         
+    return Graph(vertices,edges)
 
 
 
 if(__name__=="__main__"):
 
-    dom = minidom.parse("./Sample Data/airlines.graphml")
-    vertices = dom.getElementsByTagName('node')
-    edges=dom.getElementsByTagName('edge')
-    print(f"There are {len(vertices)} items:")
-
-    for element in vertices:
-   
-        data=element.getElementsByTagName("data")
-        print("id:",element.attributes['id'].value)
-        for d in data:
-            
-            match d.getAttribute("key"):
-                
-                case "x":
-                    print("x:",d.firstChild.nodeValue)
-                    
-
-                case "y":
-                    print("y:",d.firstChild.nodeValue)
-
-
-        print("-------------------------")
-
-    for element in edges:
-        print(element.getAttribute("source"),element.getAttribute("target"))
+    g=read_graph("airlines.graphml")

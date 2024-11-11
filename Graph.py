@@ -5,15 +5,19 @@ import numpy as np
 
 @dataclasses.dataclass
 class Vertex():
-    
     v_id:int
-    value:Any
-    is_visited:bool
+    value:Any = None
+    is_visited:bool =False
 
     def __hash__(self):
         
         return hash(self.v_id)
 
+@dataclasses.dataclass
+class Edge():
+    source:Vertex 
+    target:Vertex
+    directed:bool = False
 
 class Graph():
     
@@ -28,12 +32,15 @@ class Graph():
 
 
 
-    def __init__(self,vertices:Iterable[Vertex],edges:List[Tuple[Vertex,Vertex]]):
+    def __init__(self,
+                vertices: Iterable[Vertex|Tuple[int,Any,bool]],
+                edges:    Iterable[Tuple[Vertex,Vertex,bool]|Tuple[int,int,bool]]
+                ):
         
         """
         Constructor
         Params:
-            vertices:Iterable[Vertex] -> List of vertices of graph, duplicate vertices will be eliminated
+            vertices:List[Vertex] -> List of vertices of graph, duplicate vertices will be eliminated
             edges:List[Tuple[Vertex,Vertex]] -> List of vertex pairs, representing the edges of graph
 
         Raises Exception When:
@@ -52,16 +59,20 @@ class Graph():
                     _num_edges:int ->number of edges between vertices
             """
         
+
+        #TODO: Implement a type checker for initialisation
+        
         self._vertices:List[Vertex] = [vertex for vertex in set(vertices)]
         self._edges:DefaultDict[Vertex,List[Vertex]]=defaultdict(list)
-
-        v_ids=[v.v_id for v in self._vertices]
+        
         for edge in edges:
             
-            if not(edge[0] in v_ids and edge[1] in v_ids):
+            if not(edge.source in [v.v_id for v in self._vertices] and edge.target in [v.v_id for v in self._vertices]):
+                print(edge.source,edge.target)
+                print([v.v_id for v in self._vertices])
                 raise Exception("An End Point of Vertex Doesnt Exist in Vertex Set")
             
-            self._edges[edge[0]].append(edge[1])
+            self._edges[edge.source].append(edge.target)
 
 
         self._size:int=len(self._vertices)
@@ -88,8 +99,9 @@ class Graph():
         for vertex in self._vertices:
             current_index = self._vertices.index(vertex)
 
-            for neigbour in self._edges[vertex]:
-                neigbour_index=self._vertices.index(neigbour)
+            for neigbour in self._edges[vertex.v_id]:
+                print(neigbour)
+                neigbour_index=self._vertices.index(neigbour.v_id)
 
                 adjacency_matrix[current_index][neigbour_index]=1
 
@@ -97,20 +109,19 @@ class Graph():
     
         
 
-
+"""
 if(__name__=="__main__"):
+    
+
 
     vertices=[1,2,3,4]
-    vertices=[Vertex(i,None,False) for i in vertices]
-
     edges=[(1,2),(1,4),
             (2,1),(2,2),(2,3),(2,4),
             (3,4),
             (4,1),(4,2)]
-    
-    
+
 
     g=Graph(vertices,edges)
 
     print(g._edges)
-    print(g._adjacency_matrix)   
+    print(g._adjacency_matrix)   """
