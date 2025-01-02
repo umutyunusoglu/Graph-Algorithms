@@ -64,7 +64,6 @@ class Graph():
                     _num_edges:int ->number of edges between vertices
             """
 
-        #TODO: Implement a type checker for initialisation
 
         if (isinstance(vertices, Iterable)):
             if all(isinstance(vertex, Vertex) for vertex in vertices):
@@ -79,19 +78,24 @@ class Graph():
         else:
             raise Exception("Vertices Should be of type Iterable[Vertex|Any]")
 
+        if(not isinstance(edges, Iterable)):
+            raise Exception("Edges Should be of type Iterable[Tuple[int,int]]")
+        else:
+            if all(isinstance(edge, Tuple) for edge in edges):
+                if all(isinstance(edge[0], int) and isinstance(edge[1], int) for edge in edges):
+                    self._edges: DefaultDict[int, Tuple[int]] = defaultdict(list)
+                    for edge in edges:
+                        source = edge[0]
+                        target = edge[1]
 
+                        if not (self.does_vertex_exist(source) != None and self.does_vertex_exist(target) != None):
+                            raise Exception("An End Point of Vertex Doesnt Exist in Vertex Set")
 
-        self._edges: DefaultDict[int, Tuple[int]] = defaultdict(list)
-
-        for edge in edges:
-            source = edge[0]
-            target = edge[1]
-
-            if not (self.does_vertex_exist(source) != None and self.does_vertex_exist(target) != None):
-
-                raise Exception("An End Point of Vertex Doesnt Exist in Vertex Set")
-
-            self._edges[source].append(target)
+                        self._edges[source].append(target)
+                else:
+                    raise Exception("Edges Should be of type Iterable[Tuple[int,int]]")
+            else:
+                raise Exception("Edges Should be of type Iterable[Tuple[int,int]]")
 
         self._size: int = len(self._vertices)
         self._num_edges: int = len(self._edges)
