@@ -58,14 +58,12 @@ def fordfulkerson(graph:Graph,start,end):
 
 if __name__=="__main__":
 
-    graph=Graph.from_adjacency_matrix([[0, 16, 13, 0, 0, 0],
-                                        [0, 0, 10, 12, 0, 0],
-                                        [0, 4, 0, 0, 14, 0],
-                                        [0, 0, 9, 0, 0, 20],
-                                        [0, 0, 0, 7, 0, 4],
-                                        [0, 0, 0, 0, 0, 0]])
+    graph=Graph.from_adjacency_matrix([[0, 3, 2, 0],
+                                         [0, 0, 1, 2],
+                                         [0, 0, 0, 4],
+                                         [0, 0, 0, 0]])
 
-    flow_matrix,max_flow=fordfulkerson(graph,1,6)
+    flow_matrix,max_flow=fordfulkerson(graph,1,3)
 
     print("Flow Matrix:")
     for row in flow_matrix:
@@ -73,9 +71,6 @@ if __name__=="__main__":
     print("Max Flow:",max_flow)
 
     print("True Max Flow:",23)
-
-
-
 
 
 

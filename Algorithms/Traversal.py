@@ -15,13 +15,31 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
         Returns:
             Tuple[int] -> path from start vertex to end vertex
     """
-    #TODO: Add Adjacency Matrix input
+
+    if (isinstance(graph, Graph)):
+        adj_matrix = graph.adjacency_matrix
+
+    elif (isinstance(graph, list)):
+        for row in graph:
+            if (isinstance(row, list)):
+                if all(isinstance(entry, float | int) for entry in row):
+                    adj_matrix = graph
+                else:
+                    raise Exception("graph Should be of type Graph|List[List[float]]")
+            else:
+                raise Exception("graph Should be of type Graph|List[List[float]]")
+    else:
+        raise Exception("graph Should be of type Graph|List[List[float]]")
+
+    graph_size = len(adj_matrix)
 
 
-    visited = graph.graph_size * [False]
-    visited[start - 1] = True
+    start_index=start-1
 
-    parent = graph.graph_size * [-1]
+    visited = graph_size * [False]
+    visited[start_index] = True
+
+    parent = graph_size * [-1]
 
     queue = deque()
 
@@ -33,16 +51,22 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
     while queue:
         current_vertex= queue.popleft()
 
-        for neighbour in graph.get_neighbours(current_vertex):
-            target = neighbour.target
-            if(not visited[target-1]):
+        current_vertex_index=current_vertex-1
 
-                parent[target-1]=current_vertex
-                visited[target-1]=True
+        neighbours_indices=[i for i in range(graph_size) if adj_matrix[current_vertex_index][i]!=0]
 
-                if(target==end):
+        for neighbour_index in neighbours_indices:
 
-                    temp=target
+
+            if(not visited[neighbour_index]):
+
+                parent[neighbour_index]=current_vertex
+                visited[neighbour_index]=True
+
+                if(neighbour_index+1==end):
+
+                    temp=neighbour_index+1
+
                     while(parent[temp-1]!=-1):
                         path.append(temp)
                         temp=parent[temp-1]
@@ -50,7 +74,7 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
 
                     return tuple(reversed(path))
 
-                queue.append(target)
+                queue.append(neighbour_index+1)
     return tuple()
 
 
@@ -68,16 +92,31 @@ def DFS(graph: Graph|List[List[float]], start: int, end: int) -> Tuple[int]:
             Tuple[int] -> path from start vertex to end vertex
     """
 
-    #TODO: Add advanced type checker
-    if(isinstance(graph,list)):
-        graph=Graph.from_adjacency_matrix(graph)
 
 
+    if(isinstance(graph,Graph)):
+        adj_matrix=graph.adjacency_matrix
 
-    visited = graph.graph_size * [False]
-    visited[start - 1] = True
+    elif(isinstance(graph,list)):
+        for row in graph:
+            if(isinstance(row,list)):
+                if all(isinstance(entry,float|int) for entry in row):
+                    adj_matrix=graph
+                else:
+                    raise Exception("graph Should be of type Graph|List[List[float]]")
+            else:
+                raise Exception("graph Should be of type Graph|List[List[float]]")
+    else:
+        raise Exception("graph Should be of type Graph|List[List[float]]")
 
-    parent = graph.graph_size * [-1]
+
+    graph_size = len(adj_matrix)
+    start_index = start - 1
+
+    visited = graph_size * [False]
+    visited[start_index] = True
+
+    parent = graph_size * [-1]
 
     stack = []
 
@@ -89,23 +128,30 @@ def DFS(graph: Graph|List[List[float]], start: int, end: int) -> Tuple[int]:
 
         current_vertex = stack.pop()
 
-        for neighbour in graph.get_neighbours(current_vertex):
-            target=neighbour.target
-            if (not visited[target - 1]):
+        current_vertex_index=current_vertex-1
 
-                parent[target - 1] = current_vertex
-                visited[target - 1] = True
+        neighbours_indices=[i for i in range(graph_size) if adj_matrix[current_vertex_index][i]!=0]
 
-                if (target == end):
-                    temp = target
-                    while (parent[temp - 1] != -1):
+        for neighbour_index in neighbours_indices:
+
+            if (not visited[neighbour_index]):
+
+                parent[neighbour_index] = current_vertex
+                visited[neighbour_index] = True
+
+                if (neighbour_index+1 == end):
+
+                    temp = neighbour_index+1
+
+                    while (parent[temp-1] != -1):
                         path.append(temp)
                         temp = parent[temp - 1]
                     path.append(start)
 
                     return tuple(reversed(path))
 
-                stack.append(target)
+                stack.append(neighbour_index+1)
+
     return tuple()
 
     return []
@@ -122,6 +168,7 @@ if __name__ == "__main__":
 
     g = Graph(vertices, edges)
 
-    print(BFS(g, 1, 3))
+
+    print(BFS(g,1,3))
     print(DFS(g,1,3))
 
