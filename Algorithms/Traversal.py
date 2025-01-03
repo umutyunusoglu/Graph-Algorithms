@@ -19,11 +19,12 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
 
 
     visited = graph.graph_size * [False]
+    visited[start - 1] = True
+
     parent = graph.graph_size * [-1]
 
     queue = deque()
 
-    visited[start - 1] = True
 
     queue.append(start)
 
@@ -35,7 +36,6 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
         for neighbour in graph.get_neighbours(current_vertex):
             target = neighbour.target
             if(not visited[target-1]):
-
 
                 parent[target-1]=current_vertex
                 visited[target-1]=True
@@ -75,11 +75,11 @@ def DFS(graph: Graph|List[List[float]], start: int, end: int) -> Tuple[int]:
 
 
     visited = graph.graph_size * [False]
+    visited[start - 1] = True
+
     parent = graph.graph_size * [-1]
 
     stack = []
-
-    visited[start - 1] = True
 
     stack.append(start)
 

@@ -20,6 +20,7 @@ def fordfulkerson(graph:Graph,start,end):
     flow_matrix=[[0]*graph.graph_size for _ in range(graph.graph_size)]
     residual_graph=capacities.copy()
 
+
     max_flow=0
 
     path=DFS(residual_graph,start,end)
@@ -40,6 +41,8 @@ def fordfulkerson(graph:Graph,start,end):
             target=path[i+1]
 
             residual_graph[source-1][target-1]=residual_graph[source-1][target-1]-min_capacity
+            residual_graph[target-1][source-1]=residual_graph[target-1][source-1]+min_capacity
+
 
             flow_matrix[source-1][target-1]=flow_matrix[source-1][target-1] + min_capacity
             flow_matrix[target-1][source-1]=-flow_matrix[source-1][target-1]
@@ -51,6 +54,25 @@ def fordfulkerson(graph:Graph,start,end):
 
 
     return flow_matrix,max_flow
+
+
+if __name__=="__main__":
+
+    graph=Graph.from_adjacency_matrix([[0, 16, 13, 0, 0, 0],
+                                        [0, 0, 10, 12, 0, 0],
+                                        [0, 4, 0, 0, 14, 0],
+                                        [0, 0, 9, 0, 0, 20],
+                                        [0, 0, 0, 7, 0, 4],
+                                        [0, 0, 0, 0, 0, 0]])
+
+    flow_matrix,max_flow=fordfulkerson(graph,1,6)
+
+    print("Flow Matrix:")
+    for row in flow_matrix:
+        print(row)
+    print("Max Flow:",max_flow)
+
+    print("True Max Flow:",23)
 
 
 
