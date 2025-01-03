@@ -1,27 +1,25 @@
-from typing import Tuple, Any,List
+from typing import Tuple,List
 from Data import Graph
-import numpy as np
-from numpy.typing import ArrayLike
-import dataclasses
 from collections import deque
 
 
 def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
     """
-    Runs Breadth for Search Algorithm to find a path from start vertex to end vertex.
+        Runs Breadth-First Search (BFS) Algorithm to find a path from start vertex to end vertex.
 
+        Args:
+            graph: Graph -> Graph to be searched for
+            start: int -> id of the start vertex
+            end: int -> id of the end vertex
 
-    Args:
-        graph: Graph -> Graph to be searched for
-        start: int -> id of the start vertex
-        end: int -> id of the end vertex
-
-    Returns:
-        Tuple[int] -> path from start vertex to end vertex
+        Returns:
+            Tuple[int] -> path from start vertex to end vertex
     """
+    #TODO: Add Adjacency Matrix input
 
-    visited = graph.get_graph_size() * [False]
-    parent = graph.get_graph_size() * [-1]
+
+    visited = graph.graph_size * [False]
+    parent = graph.graph_size * [-1]
 
     queue = deque()
 
@@ -34,17 +32,17 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
     while queue:
         current_vertex= queue.popleft()
 
-
-
         for neighbour in graph.get_neighbours(current_vertex):
+            target = neighbour.target
+            if(not visited[target-1]):
 
-            if(not visited[neighbour-1]):
 
-                parent[neighbour-1]=current_vertex
-                visited[neighbour-1]=True
+                parent[target-1]=current_vertex
+                visited[target-1]=True
 
-                if(neighbour==end):
-                    temp=neighbour
+                if(target==end):
+
+                    temp=target
                     while(parent[temp-1]!=-1):
                         path.append(temp)
                         temp=parent[temp-1]
@@ -52,26 +50,32 @@ def BFS(graph: Graph, start: int, end: int) -> Tuple[int]:
 
                     return tuple(reversed(path))
 
-                queue.append(neighbour)
+                queue.append(target)
     return tuple()
 
 
-def DFS(graph: Graph, start: int, end: int) -> Tuple[int]:
+def DFS(graph: Graph|List[List[float]], start: int, end: int) -> Tuple[int]:
+
     """
-    Runs Depth for Search Algorithm to find a path from start vertex to end vertex.
+        Runs Depth-First Search (DFS) Algorithm to find a path from start vertex to end vertex.
 
+        Args:
+            graph: Graph -> Graph to be searched for
+            start: int -> id of the start vertex
+            end: int -> id of the end vertex
 
-    Args:
-        graph: Graph -> Graph to be searched for
-        start: int -> id of the start vertex
-        end: int -> id of the end vertex
-
-    Returns:
-        Tuple[int] -> path from start vertex to end vertex
+        Returns:
+            Tuple[int] -> path from start vertex to end vertex
     """
 
-    visited = graph.get_graph_size() * [False]
-    parent = graph.get_graph_size() * [-1]
+    #TODO: Add advanced type checker
+    if(isinstance(graph,list)):
+        graph=Graph.from_adjacency_matrix(graph)
+
+
+
+    visited = graph.graph_size * [False]
+    parent = graph.graph_size * [-1]
 
     stack = []
 
@@ -86,13 +90,14 @@ def DFS(graph: Graph, start: int, end: int) -> Tuple[int]:
         current_vertex = stack.pop()
 
         for neighbour in graph.get_neighbours(current_vertex):
-            if (not visited[neighbour - 1]):
+            target=neighbour.target
+            if (not visited[target - 1]):
 
-                parent[neighbour - 1] = current_vertex
-                visited[neighbour - 1] = True
+                parent[target - 1] = current_vertex
+                visited[target - 1] = True
 
-                if (neighbour == end):
-                    temp = neighbour
+                if (target == end):
+                    temp = target
                     while (parent[temp - 1] != -1):
                         path.append(temp)
                         temp = parent[temp - 1]
@@ -100,7 +105,7 @@ def DFS(graph: Graph, start: int, end: int) -> Tuple[int]:
 
                     return tuple(reversed(path))
 
-                stack.append(neighbour)
+                stack.append(target)
     return tuple()
 
     return []
