@@ -85,10 +85,6 @@ dijkstra_result = dijsktra(g,1,3)
 print("Shortest Paths:", dijkstra_result)
 ```
 
-## Documentation
-
-Detailed documentation and examples for all supported algorithms can be found in the [official documentation](https://github.com/yourusername/sugraph#documentation).
-
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to Sugraph, please follow these steps:
@@ -102,7 +98,7 @@ Please ensure your code adheres to the project's coding standards and includes a
 
 ## License
 
-Sugraph is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/yourusername/sugraph/blob/main/LICENSE) file for details.
+Sugraph is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/umutyunusoglu/sugraph/blob/main/LICENSE.md) file for details.
 
 ---
 
