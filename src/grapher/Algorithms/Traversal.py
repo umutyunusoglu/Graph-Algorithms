@@ -1,5 +1,5 @@
 from typing import Tuple,List
-from Data import Graph
+from src.Grapher.Data import Graph
 from collections import deque
 
 

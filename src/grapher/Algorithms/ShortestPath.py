@@ -1,5 +1,5 @@
-from typing import Tuple, Any, List
-from Data import Graph
+from typing import Tuple, List
+from src.Grapher.Data import Graph
 from math import inf
 
 def belmannford(graph: Graph, start: int, end: int) -> Tuple[int]:
