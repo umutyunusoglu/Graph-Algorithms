@@ -1,2 +1,1 @@
-from .Data import *
-from Algorithms import *
+__all__ = ["Data","Algorithms"]

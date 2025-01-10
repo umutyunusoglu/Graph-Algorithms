@@ -1,0 +1,6 @@
+Metadata-Version: 2.2
+Name: grapher
+Version: 0.1.0
+Provides-Extra: dev
+Requires-Dist: numpy; extra == "dev"
+Requires-Dist: matplotlib; extra == "dev"

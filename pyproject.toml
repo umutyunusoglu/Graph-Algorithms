@@ -1,0 +1,12 @@
+
+[project]
+name = "grapher"
+version="0.1.0"
+dependencies=[]
+
+[project.optional-dependencies]
+dev = ["numpy","matplotlib"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
