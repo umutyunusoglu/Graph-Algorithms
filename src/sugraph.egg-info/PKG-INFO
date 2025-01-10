@@ -1,0 +1,30 @@
+Metadata-Version: 2.2
+Name: sugraph
+Version: 0.1.0
+Summary: A python package for graph analysis
+Author-email: Umut Yunusoğlu <umut.yunusoglu@sabanciuniv.edu>
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: numpy; extra == "dev"
+Requires-Dist: matplotlib; extra == "dev"
+
+# Graph-Algorithms
+A Collection of Graph Algorithms Implemented In Pyhon
+
+## Repository Structure
+Repository is organised in a way to easily find algorithms for different problems of graph theory
+
+### A-Traversal Algorithms
+**1. Breadth For Search**
+  
+**2. Depth For Search**
+!TODO
+
+**3. Djikstra**
+TODO
+
+**4. A\***
+TODO

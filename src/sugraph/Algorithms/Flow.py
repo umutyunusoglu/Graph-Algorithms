@@ -1,5 +1,5 @@
 from typing import Tuple
-from src.grapher.Data import Graph
+from src.sugraph.Data import Graph
 from math import inf
 from Traversal import DFS
 

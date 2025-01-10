@@ -1,12 +1,22 @@
 
 [project]
-name = "grapher"
+name = "sugraph"
 version="0.1.0"
 dependencies=[]
-
+authors = [
+  { name="Umut Yunusoğlu", email="umut.yunusoglu@sabanciuniv.edu" },
+]
+description = "A python package for graph analysis"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
 [project.optional-dependencies]
 dev = ["numpy","matplotlib"]
 
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+

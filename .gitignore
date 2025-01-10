@@ -1,4 +1,4 @@
-.idea
-Algorithms
+..gitignore
+pyproject.toml
+dist
 Data
-.gitignore
