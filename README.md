@@ -77,7 +77,7 @@ g = Graph.from_adjacency_matrix(adj_matrix)
 
 ```python
 from sugraph.Algorithms.Traversal import BFS
-from sugraph.algorithms.ShortestPath import dijkstra
+from sugraph.Algorithms.ShortestPath import dijkstra
 bfs_result = BFS(g,1,3)
 print("BFS Traversal:", bfs_result)
 
