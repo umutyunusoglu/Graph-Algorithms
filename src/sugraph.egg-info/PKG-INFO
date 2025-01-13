@@ -1,12 +1,13 @@
 Metadata-Version: 2.2
 Name: sugraph
-Version: 0.1.0
+Version: 0.1.1
 Summary: A python package for graph analysis
 Author-email: Umut Yunusoğlu <umut.yunusoglu@sabanciuniv.edu>
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+License-File: LICENSE.md
 Provides-Extra: dev
 Requires-Dist: numpy; extra == "dev"
 Requires-Dist: matplotlib; extra == "dev"

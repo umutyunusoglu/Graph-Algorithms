@@ -1,4 +1,3 @@
-..gitignore
+.gitignore
 pyproject.toml
 dist
-Data

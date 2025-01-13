@@ -1,7 +1,7 @@
 
 [project]
 name = "sugraph"
-version="0.1.0"
+version="0.1.1"
 dependencies=[]
 authors = [
   { name="Umut Yunusoğlu", email="umut.yunusoglu@sabanciuniv.edu" },

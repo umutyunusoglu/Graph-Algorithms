@@ -14,6 +14,11 @@ def belmannford(graph: Graph, start: int, end: int) -> Tuple[int]:
     Returns:
         Tuple[int]: path from start vertex to end vertex
     """
+
+    #TODO: Add Support for adjacency matrix input
+    if(isinstance(graph, Graph)):
+        raise Exception("Graph should be an instance of Graph class")
+
     distances = graph.graph_size * [inf]
     distances[start - 1] = 0
 
@@ -56,6 +61,13 @@ def dijkstra(graph: Graph, start: int, end: int):
     Returns:
         Tuple[int]: path from start vertex to end vertex
     """
+
+
+    #TODO: Add Support for adjacency matrix input
+    if(isinstance(graph, Graph)):
+        raise Exception("Graph should be an instance of Graph class")
+
+
     distances = graph.graph_size * [inf]
     distances[start - 1] = 0
 
