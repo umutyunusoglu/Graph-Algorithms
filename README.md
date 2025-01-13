@@ -20,7 +20,7 @@ pip install sugraph
 Alternatively, you can install the library directly from the source:
 
    ```bash
-   pip install  https://github.com/umutyunusoglu/sugraph.git
+   pip install git+https://github.com/umutyunusoglu/sugraph/
    ```
 
 
