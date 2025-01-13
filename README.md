@@ -19,23 +19,10 @@ pip install sugraph
 
 Alternatively, you can install the library directly from the source:
 
-1. Clone the repository:
-
    ```bash
-   git clone https://github.com/yourusername/sugraph.git
+   pip install  https://github.com/umutyunusoglu/sugraph.git
    ```
 
-2. Navigate to the project directory:
-
-   ```bash
-   cd sugraph
-   ```
-
-3. Install the library:
-
-   ```bash
-   pip install .
-   ```
 
 ## Usage
 
